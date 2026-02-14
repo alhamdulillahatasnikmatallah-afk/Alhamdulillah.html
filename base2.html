@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kandang Kambing Bang Faiz - Premium Goat Farm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0d0a;
+      --bg-light: #1a1714;
+      --fg: #f5f0e8;
+      --muted: #a89f94;
+      --accent: #d4a853;
+      --accent-light: #e8c87a;
+      --card: #1f1b16;
+      --border: #2d2820;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    /* Hero Background Pattern */
+    .hero-pattern {
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(212, 168, 83, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(212, 168, 83, 0.1) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(30, 25, 20, 1) 0%, var(--bg) 100%);
+    }
+
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: float 8s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+      25% { transform: translateY(-30px) translateX(10px); opacity: 0.7; }
+      50% { transform: translateY(-60px) translateX(-10px); opacity: 0.4; }
+      75% { transform: translateY(-30px) translateX(5px); opacity: 0.6; }
+    }
+
+    /* Staggered Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Card Hover Effects */
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 60px rgba(212, 168, 83, 0.1);
+    }
+    .product-card:hover .card-image {
+      transform: scale(1.05);
+    }
+    .card-image {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Button Styles */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212, 168, 83, 0.3);
+    }
+
+    /* Stats Counter Animation */
+    .stat-number {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Image Overlay */
+    .image-overlay {
+      background: linear-gradient(180deg, transparent 0%, rgba(15, 13, 10, 0.9) 100%);
+    }
+
+    /* Navbar */
+    .navbar {
+      backdrop-filter: blur(20px);
+      background: rgba(15, 13, 10, 0.8);
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(15, 13, 10, 0.95);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Gallery Image */
+    .gallery-item {
+      overflow: hidden;
+    }
+    .gallery-item img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Testimonial Card */
+    .testimonial-card {
+      background: linear-gradient(135deg, var(--card) 0%, rgba(31, 27, 22, 0.5) 100%);
+      border: 1px solid var(--border);
+    }
+
+    /* Form Focus */
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.2);
+    }
+
+    /* Decorative Line */
+    .deco-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed top-0 left-0 right-0 z-50 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center">
+          <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3c-1.5 0-3 1-3 3 0 1 .5 2 1 2.5C8 9 6 11 6 14c0 4 3 7 6 7s6-3 6-7c0-3-2-5-4-5.5.5-.5 1-1.5 1-2.5 0-2-1.5-3-3-3z"/>
+            <circle cx="9" cy="5" r="1" fill="currentColor"/>
+            <circle cx="15" cy="5" r="1" fill="currentColor"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-display font-bold text-lg text-amber-100">Kandang Kambing</h1>
+          <p class="text-xs text-amber-500 -mt-1">Bang Faiz</p>
+        </div>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#beranda" class="text-sm text-amber-100 hover:text-amber-400 transition-colors">Beranda</a>
+        <a href="#tentang" class="text-sm text-amber-100 hover:text-amber-400 transition-colors">Tentang</a>
+        <a href="#produk" class="text-sm text-amber-100 hover:text-amber-400 transition-colors">Produk</a>
+        <a href="#galeri" class="text-sm text-amber-100 hover:text-amber-400 transition-colors">Galeri</a>
+        <a href="#kontak" class="btn-primary bg-gradient-to-r from-amber-600 to-amber-700 px-6 py-2.5 rounded-full text-sm font-medium text-white">
+          Hubungi Kami
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="menuBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Toggle Menu">
+        <span class="w-6 h-0.5 bg-amber-100 transition-all duration-300"></span>
+        <span class="w-6 h-0.5 bg-amber-100 transition-all duration-300"></span>
+        <span class="w-4 h-0.5 bg-amber-100 transition-all duration-300"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-gradient-to-b from-stone-900 to-stone-950 z-50 p-8 flex flex-col">
+    <button id="closeMenu" class="self-end w-10 h-10 flex items-center justify-center text-amber-100" aria-label="Close Menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="flex flex-col gap-6 mt-12">
+      <a href="#beranda" class="text-lg text-amber-100 hover:text-amber-400 transition-colors">Beranda</a>
+      <a href="#tentang" class="text-lg text-amber-100 hover:text-amber-400 transition-colors">Tentang</a>
+      <a href="#produk" class="text-lg text-amber-100 hover:text-amber-400 transition-colors">Produk</a>
+      <a href="#galeri" class="text-lg text-amber-100 hover:text-amber-400 transition-colors">Galeri</a>
+      <a href="#kontak" class="btn-primary bg-gradient-to-r from-amber-600 to-amber-700 px-6 py-3 rounded-full text-center font-medium text-white mt-4">
+        Hubungi Kami
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="beranda" class="hero-pattern min-h-screen relative flex items-center overflow-hidden">
+    <!-- Particles -->
+    <div class="particles-container absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+    
+    <!-- Decorative Elements -->
+    <div class="absolute top-1/4 left-10 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-amber-700/10 rounded-full blur-3xl" aria-hidden="true"></div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-24 pb-16 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 bg-amber-900/30 border border-amber-700/30 rounded-full px-4 py-2 mb-6">
+            <span class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
+            <span class="text-sm text-amber-300">Premium Goat Farm Since 2018</span>
+          </div>
+          
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+            <span class="text-amber-100">Kandang Kambing</span><br>
+            <span class="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">Bang Faiz</span>
+          </h1>
+          
+          <p class="text-lg text-stone-400 max-w-lg mb-8 leading-relaxed">
+            Peternakan kambing premium dengan kualitas terbaik. Kami menyediakan kambing sehat, bibit unggul, dan layanan qurban terpercaya. Dipercaya ribuan pelanggan di seluruh Indonesia.
+          </p>
+          
+          <div class="flex flex-wrap gap-4">
+            <a href="#produk" class="btn-primary bg-gradient-to-r from-amber-500 to-amber-600 px-8 py-4 rounded-full font-semibold text-stone-900 inline-flex items-center gap-2">
+              Lihat Produk
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+            <a href="#tentang" class="px-8 py-4 rounded-full font-semibold text-amber-100 border border-amber-700/50 hover:bg-amber-900/30 transition-colors inline-flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Tentang Kami
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="reveal relative" style="transition-delay: 0.2s;">
+          <div class="relative aspect-[4/5] max-w-md mx-auto">
+            <div class="absolute inset-0 bg-gradient-to-br from-amber-600/30 to-amber-900/30 rounded-3xl transform rotate-6"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-stone-800 to-stone-900 rounded-3xl overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-48 h-48 text-amber-600/30" viewBox="0 0 100 100" fill="currentColor">
+                  <ellipse cx="50" cy="60" rx="30" ry="25"/>
+                  <circle cx="50" cy="30" r="18"/>
+                  <ellipse cx="35" cy="28" rx="5" ry="8"/>
+                  <ellipse cx="65" cy="28" rx="5" ry="8"/>
+                  <circle cx="43" cy="26" r="3" fill="#0f0d0a"/>
+                  <circle cx="57" cy="26" r="3" fill="#0f0d0a"/>
+                  <ellipse cx="50" cy="34" rx="4" ry="3" fill="#d4a853"/>
+                </svg>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-stone-900 to-transparent"></div>
+            </div>
+            
+            <!-- Floating Badge -->
+            <div class="absolute -bottom-4 -left-4 bg-gradient-to-br from-stone-800 to-stone-900 border border-amber-700/30 rounded-2xl p-4 shadow-2xl">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-amber-600/20 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-stone-500">Terakreditasi</p>
+                  <p class="font-semibold text-amber-100">Premium Quality</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Badge -->
+            <div class="absolute -top-2 -right-2 bg-gradient-to-br from-amber-600 to-amber-700 rounded-2xl p-4 shadow-2xl">
+              <p class="text-2xl font-bold text-stone-900">500+</p>
+              <p class="text-xs text-stone-800">Kambing Terjual</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <span class="text-xs text-stone-500">Scroll</span>
+      <div class="w-6 h-10 border-2 border-stone-700 rounded-full flex items-start justify-center p-1">
+        <div class="w-1.5 h-3 bg-amber-500 rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="relative py-16 bg-gradient-to-b from-stone-900/50 to-transparent">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="reveal text-center">
+          <p class="stat-number font-display text-4xl md:text-5xl font-bold">6+</p>
+          <p class="text-stone-500 mt-2">Tahun Pengalaman</p>
+        </div>
+        <div class="reveal text-center" style="transition-delay: 0.1s;">
+          <p class="stat-number font-display text-4xl md:text-5xl font-bold">500+</p>
+          <p class="text-stone-500 mt-2">Kambing Terjual</p>
+        </div>
+        <div class="reveal text-center" style="transition-delay: 0.2s;">
+          <p class="stat-number font-display text-4xl md:text-5xl font-bold">350+</p>
+          <p class="text-stone-500 mt-2">Pelanggan Puas</p>
+        </div>
+        <div class="reveal text-center" style="transition-delay: 0.3s;">
+          <p class="stat-number font-display text-4xl md:text-5xl font-bold">100%</p>
+          <p class="text-stone-500 mt-2">Kualitas Terjamin</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="tentang" class="py-24 relative">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-amber-900/5 to-transparent" aria-hidden="true"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal order-2 lg:order-1">
+          <div class="relative">
+            <div class="aspect-square max-w-lg mx-auto bg-gradient-to-br from-stone-800 to-stone-900 rounded-3xl overflow-hidden border border-stone-800">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-64 h-64 text-amber-600/20" viewBox="0 0 100 100" fill="currentColor">
+                  <rect x="10" y="40" width="80" height="50" rx="5"/>
+                  <rect x="20" y="45" width="20" height="30" rx="2" fill="#0f0d0a"/>
+                  <rect x="60" y="45" width="20" height="30" rx="2" fill="#0f0d0a"/>
+                  <polygon points="10,40 50,10 90,40"/>
+                  <circle cx="50" cy="25" r="5" fill="#d4a853"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Feature Card -->
+            <div class="absolute -bottom-6 -right-6 md:right-10 bg-gradient-to-br from-stone-800 to-stone-900 border border-stone-700 rounded-2xl p-5 max-w-xs">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-green-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-amber-100">Kandang Modern</p>
+                  <p class="text-sm text-stone-500 mt-1">Fasilitas bersih & higienis dengan perawatan profesional</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal order-1 lg:order-2" style="transition-delay: 0.2s;">
+          <div class="deco-line mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-amber-100 mb-6">
+            Tentang Kami
+          </h2>
+          <p class="text-stone-400 text-lg leading-relaxed mb-6">
+            <strong class="text-amber-400">Kandang Kambing Bang Faiz</strong> adalah peternakan kambing premium yang berdiri sejak 2018. Berawal dari hobi dan kecintaan terhadap dunia peternakan, kini kami telah berkembang menjadi salah satu penyedia kambing qurban dan bibit unggul terpercaya.
+          </p>
+          <p class="text-stone-400 leading-relaxed mb-8">
+            Dengan pengalaman lebih dari 6 tahun, kami berkomitmen menghadirkan kambing-kambing sehat dengan kualitas terbaik. Setiap kambing dirawat dengan pakan berkualitas, vitamin teratur, dan pengawasan kesehatan intensif.
+          </p>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-amber-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-amber-100">Sehat & Higienis</p>
+                <p class="text-sm text-stone-500">Perawatan rutin</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-amber-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+              
